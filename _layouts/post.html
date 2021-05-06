@@ -8,9 +8,6 @@
 <html>
 	<head>
     {% include head.html %}
-		{% if page.use_math %}
-  		{% include mathjax_support.html %}
-		{% endif %}
 	</head>
 	<body class="is-loading">
 
@@ -32,6 +29,11 @@
 				<!-- Main -->
 				<div id="main">
           <section class="post">
+				<script type="text/x-mathjax-config">
+				MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+				</script>
+				<script type="text/javascript" src="http://cdn.mathjax.org/math...">
+				</script>
     				<header class="major">
       				<h1>{{page.title}}</h1>
       			
