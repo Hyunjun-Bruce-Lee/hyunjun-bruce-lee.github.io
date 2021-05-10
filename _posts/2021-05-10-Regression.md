@@ -136,6 +136,44 @@ SST: total sum of square (편차 제곱 합$\;\to\;\sum_{i=1}^n(y_i- \bar{y})^2$
 
 Cross Entropy는 정보의 가치를 발생 확률로서 측정하는 것에서 시작한다. 발생확률이 높은 정보인 'Covid-19로 인하여 경제성장률이 저조할 것이다.'가 있을때, 이 정보는 발생확률이 높기에 누구나 다 알고 있는 정보이다. 따라서 이 정보의 가치는 낮다고 할 수 있다. 
 
+Cross Entropy는 Claude Shannon이 제안한 정보량을 계량화하는 방법이다. 확률이 큰 사건이 발생한다는 정보는 정보량이 작고, 확률이 작은 사건의 정보는 정보량이 크다는 아이디어로, 정보량은 확률에 반비례한다고 정의하였다. 또한, 독립적인 두 사건이 발생할 확률은 서로 곱해지지만 정보량은 서로 더해지는 것이 자연스러움으로 정보량을 확률의 역수에 로그를 취한 형태로 제안하였다. 그리고 발생할 수 있는 모든 사건들의 평균을 정보량으로 정의했다. 이렇게 정의된 정보량은 물리학에서 사용하는 볼츠만 엔트로피와 동일한 형태이다.
+
+>$$
+>정보량\to log(\frac{1}{p})\to \sum_ip_ilog(\frac{1}{p_i}) = -\sum_ip_ilog(p_i) = H(p)
+>$$
+
+
+
+- 분포의 형태를 전혀 알 수 없는 어떠한 확률분포 p를 찾는 경우, 잘 알고있는 분포 q를 이용하여 근사적으로 p를 찾을 수 있다.
+- 근사분포 q의 정보량과 원 분포 p의 정보량 차이는 $\Delta_i$로 표현할 수 있고 이를 정보의 손실량이라 할 수 있다. 이때 정보 손실량의 기댓값을 KL Divergence라고 한다.
+- KL Divergence를 이용하면 두 확률분포 p,q의 유사성을 정량적으로 측정할 수 있다.
+
+>$$
+>KL\;Divergence\\
+>\;\\
+>\Delta_i = -log(q_i)+log(p_i) \to E(\Delta_i) = \sum_ip_i\Delta_i = -\sum_ip_ilog(q_i) + \sum_ip_ilog(p_i) = D_{KL}(p||q)
+>$$
+
+- $D_{KL}(p||q)$는 대칭적 구조가 아니다. 이것을 대칭 구조로 변형한 것을 Jensen-Shannon Divergence(JSD)라고 한다.
+
+>$$
+>\begin{align*}
+>D_{KL}(p||q) &\neq D_{KL}(q||p)\\
+>JSD(p||q)&=JSD(q||p)\qquad
+>JSD(p||q) =\frac{1}{2}D_{KL}(p||\frac{p+q}{2})+\frac{1}{2}D_{KL}(q||\frac{p+q}{2})\qquad 
+>\end{align*}
+>$$
+
+- q분포를 이용하여 p분포를 추정하려면, q분포의 파라메터를 추정해 가면서 $D_{KL}(p||q)$가 최소가 되는 지점을 찾으면 된다. 이때 KL Divergence의 첫번째 항은 q와 무관함으로 두번째 항만 최소화 시키면 된다 (두 번째 항을 Cross Entropy라고 한다). 
+
+>$$
+>Cross\;Entropy = -\sum_ip_ilog(q_i) = H(p,q) \qquad (D_{KL}(p||q) = H(p)-H(p,q))
+>$$
+
+
+
+
+
 
 
 ### Practice (python)
