@@ -154,7 +154,7 @@ Cross Entropy는 Claude Shannon이 제안한 정보량을 계량화하는 방법
 >\Delta_i = -log(q_i)+log(p_i) \to E(\Delta_i) = \sum_ip_i\Delta_i = -\sum_ip_ilog(q_i) + \sum_ip_ilog(p_i) = D_{KL}(p||q)
 >$$
 
-- $D_{KL}(p||q)$는 대칭적 구조가 아니다. 이것을 대칭 구조로 변형한 것을 Jensen-Shannon Divergence(JSD)라고 한다.
+- $D_{KL}(p\|\|q)$는 대칭적 구조가 아니다. 이것을 대칭 구조로 변형한 것을 Jensen-Shannon Divergence(JSD)라고 한다.
 
 >$$
 >\begin{align*}
@@ -164,7 +164,7 @@ Cross Entropy는 Claude Shannon이 제안한 정보량을 계량화하는 방법
 >\end{align*}
 >$$
 
-- q분포를 이용하여 p분포를 추정하려면, q분포의 파라메터를 추정해 가면서 $D_{KL}(p||q)$가 최소가 되는 지점을 찾으면 된다. 이때 KL Divergence의 첫번째 항은 q와 무관함으로 두번째 항만 최소화 시키면 된다 (두 번째 항을 Cross Entropy라고 한다). 
+- q분포를 이용하여 p분포를 추정하려면, q분포의 파라메터를 추정해 가면서 $D_{KL}(p\|\|q)$가 최소가 되는 지점을 찾으면 된다. 이때 KL Divergence의 첫번째 항은 q와 무관함으로 두번째 항만 최소화 시키면 된다 (두 번째 항을 Cross Entropy라고 한다). 
 
 >$$
 >Cross\;Entropy = -\sum_ip_ilog(q_i) = H(p,q) \qquad (D_{KL}(p||q) = H(p)-H(p,q))
@@ -172,14 +172,127 @@ Cross Entropy는 Claude Shannon이 제안한 정보량을 계량화하는 방법
 
 
 
+### 참고 사항 : Cross Entropy와 Loss Function
 
+- 분류 문제에 있어 예측값($y^p$)가 실측값(y^t)에 가깝게 나오도록 학습하기 위해 loss 함수로 Cross Entropy를 사용하고, 활성함수로 Softmax를 사용한다. $y\&p$와 $y^t$는 확률분포이다.
+
+> $$
+> y^t = [1,0,0]\quad (1,0 : Label)\qquad\qquad y^p = [0.7,0.1,0.2]\quad(softmax)
+> $$
+
+
+
+- 두 확률분포 $(y^t,y^p)$의 유사성을 측정하기 위해 KL divergence $(D_{KL})$를 사용할 수 있고, $(D_{KL})$ 은 entropy와 cross entropy로 나타낼 수 있다.
+
+> $$
+> D_{KL}(y^t||y^p) = -\sum_iy^t_ilog(y^p_i)\sim Cross\;Entropy\;(CE)
+> $$
+
+
+
+- $y^t$의 분포가 One-hot encoding 인 경우 (Classification) entropy항 $H(y^t)=0$이 되어 CE만으로 두 분포의 유사성을 나타낼 수 있다.
+- 아래의 절차에 의하면 CE를 minimize하는 방향으로 학습시키면 $y^p$가 $y^t$에 점점 가까워 짐을 알 수 있다.
+
+
+
+> $$
+> jensen's\;inequality\;for\;log(x): log(E[y^p_i]) \geq E[log(y^p_i)] \to log(\sum_iy^t_iy^p_i) \geq \sum_i y^t_ilog(y^p_i)=-CE \\
+> \;\\
+> \sum_iy^t_iy^p_i=1\times 0.7+0\times 0.1+0\times 0.2=0.7=Pr(y_1^t=y_1^p)\\
+> log(Pr(y^t_1=y^p_1)) \geq-CE \qquad\qquad\qquad
+> Pr(y^t_1=y^p_1) \geq e^{-CE}\\
+> \;\\
+> mi0n(CE) \to max(Pr(y^t_1=y^p_1)) \to [y^p \to y^t]
+> $$
+>
+> - CE를 작게 만들수록 Low bound가 증가함으로 $y^t_1=y^p_1$일 확률이 증가한다.
+> - 이 원리에 의해 loss function으로 CE를 사용할 수 있다.
+> - Classification문제에 대해서는 MSE보다 CE를 사용하는것이 더 성능이 좋다고 알려져있다.
+
+
+
+### BCE(Binary Cross Entropy) 와 CCE(Categorical Cross Entropy)
+
+- Cross entropy는 크게 2가지로 나뉜다. 먼저 이진분류 작업을 수행하는데 사용되는 BCE가 있고, 다중분류 작업에 사용되는 CCE가 있다.
+- 단, 다중분류에 있어 결과 값이 여러 라벨에 해당되는 경우는 BCE를 이용한다.
+- 위 처렴 CE가 사용되는 케이스에 다양한 경우가 있는 만큼, CE는 올바른 판단하에 BCE 혹은 CCE를 선별적으로 적용하여야 한다.
+
+
+
+> **Case 1 (BCE - Binary classification)**
+>
+> Loss function : Binaty Cross Entropy
+>
+> $CE = -(0 \times log(0.2) +1 \times log(0.8)) = 0.2231$
+>
+> Prediction Value : 0.8&nbsp;&nbsp;&nbsp;&nbsp;(sigmoid)
+>
+> True Value : 1 
+>
+> &nbsp;
+>
+> **Case 2 (CCE - Multi class classifiction)**
+>
+> Loss function : Categorical Cross Entropy
+>
+> $CE = -\frac{1}{3}(0 \times log(0.1)+1 \times log(0.7) +0 \times log(0.2)) = 0.1189$
+>
+> Prediction Value : 0.1&nbsp;&nbsp;&nbsp;&nbsp;0.7&nbsp;&nbsp;&nbsp;&nbsp;0.2&nbsp;&nbsp;&nbsp;&nbsp;(sigmoid -> softmax)
+>
+> True Value : 0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;(One-hot)
+>
+> &nbsp;
+>
+> **Case 3 (BCE - Multi label classification)**
+>
+> Loss function : Binary Cross Entropy
+>
+> $CE = -\frac{1}{3}(0 \times log(0.2)+1 \times log(0.8) +1 \times log(0.7)+0 \times log(0.3) + 1 \times log(0.8)+ 0 \times log(0.2)) = 0.2677$
+>
+> Prediction Value : 0.2&nbsp;&nbsp;&nbsp;&nbsp;0.7&nbsp;&nbsp;&nbsp;&nbsp;0.8&nbsp;&nbsp;&nbsp;&nbsp;(sigmoid)
+>
+> True Value : 0 &nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1
+>
+> How to cal : 개별 출력마다 BCE를 계산한 다음 평균을 취한다
+>
+> &nbsp;
+> $$
+> sigmoid\;s(x) = \frac{1}{1+e^{-x}}\qquad \qquad softmax\;s(x)_i=\frac{e^{x_i}}{\sum_{j=1}^ke^{x_i}}
+> $$
+
+
+
+### Rgularization
+
+- 학습 과정은 loss 함수가 최소가되는 weights를 추정하는 것이다. 하지만 만약 특정한 Feature에 곱해지는 weights가 과도하게 커진다면, 특정 Feature만을 과도하게 반영 하게 된 것이도, 이럴경우 과잉적합(overfitting)이 발생할 수 있다.
+- 이처럼 특정 weight가 과도하게 커지는 것을 방지하게 하는 기술이 Regularization이다.
+- Regularization은 loss함수에 penalty항을 부여하여 특정 w가 커지면 penalty항이 커지게 되고 loss가 커지게하는 방법이다.
+- Regularization에는 Laso(L1 regularization)와 Ridge(L2 regularization)방식이 있다.
+- L1과 L2방식은 패널티항에 부여되는 w의 정의에 따라 구분된다. L1 = $\|w\|$ &nbsp;&nbsp; L2 = $w^2$
+
+> **Regularization in MSE (L2)**
+>
+> $-\frac{1}{n}\sum_{i=1}^n(y_i-\hat y_i)^2+\lambda\sum_{i=1}^nw_i^2$
+>
+> &nbsp;
+>
+> **Regularization in BCE (L2)**
+>
+> $-\frac{1}{n}\sum_{i=1}^n[y_ilog(\hat y_i)+(1-y_i)log(1-\hat y_i)] + \lambda\sum_{i=1}^nw_i^2$
+>
+> &nbsp;
+>
+> **Regularization in sklean (L2)**
+>
+> $min_{(w,c)}\frac{1}{2}w^tw+C\sum_{i=1}^nlog(exp(-y^\prime_ix^t_i\cdot w+bias)+1)$
 
 
 
 ### Practice (python)
 
-[Cancer data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/D_Tree/DTree(cancer).py)
+[Credit data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/logistic_Regression(credit).py)
 
-[Post pruning](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/D_Tree/DTree(post_prune).py)
+[Iris data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/logistic_Regression(iris).py)
 
-[Pre pruning](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/D_Tree/DTree(pre_prune).py)
+[Iris data(L2)](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/logistic_Regression(reg).py)
+
