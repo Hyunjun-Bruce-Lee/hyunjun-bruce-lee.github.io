@@ -163,6 +163,16 @@ $$
 
 
 
+### Scikit Learn 상의 Naive Bayes
+
+**Gaussian NB** : 연속적인 모든 데이터
+
+**BernoulliNB** : 이진 데이터
+
+**MultinomialNB** : 빈도 데이터 (카운트 기반)
+
+
+
 ### Practice (python)
 
 [Random data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/linear_Regression.py)
