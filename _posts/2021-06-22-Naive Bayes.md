@@ -74,7 +74,7 @@ $$
 > P(Marital=Married|NO) = \frac{4}{7} \qquad P(Marital=Married|YES) = \frac{0}{3}
 > $$
 
-- 단 $P(Annual=120K\|NO\;or\;YES)$의 경우 견속적인 실수값 이기에 정규분포를 이용하여 계산한다.
+- 단 $P(Annual=120K\|NO\;or\;YES)$의 경우 연속적인 실수값 이기에 정규분포를 이용하여 계산한다.
 
 > $$
 > P(Annual=120K|NO) \to \frac{1}{\sqrt{2\pi\sigma}}exp[-\frac{(x-\mu)^2}{2\sigma^2}]\\
@@ -91,7 +91,11 @@ $$
 > P(Annual=120K|NO) \to \frac{1}{\sqrt{2\pi*54.54}}exp[-\frac{(120-110)^2}{2*2975}] = 0.007193\\
 > $$
 >
-> 
+> &nbsp;
+>
+> &nbsp;
+>
+> &nbsp;
 > $$
 > P(Annual=120K|YES) \to \frac{1}{\sqrt{2\pi\sigma}}exp[-\frac{(x-\mu)^2}{2\sigma^2}]\\
 > \;\\
