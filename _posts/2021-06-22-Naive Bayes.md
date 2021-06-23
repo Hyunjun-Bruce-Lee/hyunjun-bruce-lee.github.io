@@ -32,9 +32,13 @@ project: NA
 ### Bayes 정리
 
 Bayes정리는 확률을 기반으로 새로운 정보가 주어질때마다 확률을 조정하여, 특정결과에 대한 확률을 계산하는 이론이다. (두 확률 변수의 사전 확률과 사후 확률 사이의 관계를 나타내는 **정리**다. **베이즈** 확률론 해석에 따르면 **베이즈 정리**는 사전확률로부터 사후확률을 구할 수 있다. - wiki)
+
+&nbsp;
 $$
 P(A|B)=\frac{P(B|A)\cdot P(A)}{P(B)}
 $$
+&nbsp;
+
 [베이즈 정리 이해에 도움이 되는 글](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=vinci22c&logNo=220346570972)
 
 
