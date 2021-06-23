@@ -91,11 +91,9 @@ $$
 > P(Annual=120K|NO) \to \frac{1}{\sqrt{2\pi*54.54}}exp[-\frac{(120-110)^2}{2*2975}] = 0.007193\\
 > $$
 >
-> &nbsp;
->
-> &nbsp;
->
-> &nbsp;
+
+&nbsp;
+
 > $$
 > P(Annual=120K|YES) \to \frac{1}{\sqrt{2\pi\sigma}}exp[-\frac{(x-\mu)^2}{2\sigma^2}]\\
 > \;\\
