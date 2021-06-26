@@ -95,7 +95,6 @@ $$
 > \;\\
 > P(Annual=120K|NO) \to \frac{1}{\sqrt{2\pi*54.54}}exp[-\frac{(120-110)^2}{2*2975}] = 0.007193\\
 > $$
->
 
 &nbsp;
 
@@ -175,8 +174,8 @@ $$
 
 ### Practice (python)
 
-[Random data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/linear_Regression.py)
+[Iris data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Naive_Bayes/NBayes(iris).py)
 
-[Boston data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/linear_Regression(boston).py)
+[Income data Case1 (Gaussian + Multinomial)](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Naive_Bayes/NBayes(mix-1).py)
 
-[OLS_TensorFlow](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/Regression(OLS).py)
+[Income data Case2 (Gaussian + Multinomial)](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Naive_Bayes/NBayes(mix-2).py)

@@ -91,13 +91,13 @@ SST: total sum of square (편차 제곱 합$\;\to\;\sum_{i=1}^n(y_i- \bar{y})^2$
 
 ### Practice (python)
 
-[Random data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/linear_Regression.py)
+[Random data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/linear_Regression.py)
 
-[Boston data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/linear_Regression(boston).py)
+[Boston data]https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/linear_Regression(boston).py)
 
-[OLS_TensorFlow](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/Regression(OLS).py)
+[OLS_TensorFlow](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/Regression(OLS).py)
 
-[TLS_TensorFlow](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/Regression(TLS).py)
+[TLS_TensorFlow](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/Regression(TLS).py)
 
 
 
@@ -290,9 +290,9 @@ Cross Entropy는 Claude Shannon이 제안한 정보량을 계량화하는 방법
 
 ### Practice (python)
 
-[Credit data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/logistic_Regression(credit).py)
+[Credit data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/logistic_Regression(credit).py)
 
-[Iris data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/logistic_Regression(iris).py)
+[Iris data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/logistic_Regression(iris).py)
 
-[Iris data(L2)](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/Regression/logistic_Regression(reg).py)
+[Iris data(L2)](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/Regression/logistic_Regression(reg).py)
 

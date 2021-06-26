@@ -290,8 +290,8 @@ $$
 
 ### Practice (python)
 
-[Cancer data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/D_Tree/DTree(cancer).py)
+[Cancer data](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/D_Tree/DTree(cancer).py)
 
-[Post pruning + Feature importance](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/D_Tree/DTree(post_prune).py)
+[Post pruning + Feature importance](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/D_Tree/DTree(post_prune).py)
 
-[Pre pruning](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/main/D_Tree/DTree(pre_prune).py)
+[Pre pruning](https://github.com/Hyunjun-Bruce-Lee/ML_study/blob/master/D_Tree/DTree(pre_prune).py)
